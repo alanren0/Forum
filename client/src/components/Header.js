@@ -3,7 +3,7 @@ import "../App.css";
 import { Link, useParams } from 'react-router-dom'
 
 
-const Header = ( {authToken} ) => {
+const Header = ( {showDesc} ) => {
 
     const apiUrl = 'http://localhost:3001';
     const { community } = useParams();
@@ -25,17 +25,17 @@ const Header = ( {authToken} ) => {
         <div className="header-container">
             <div className="header">
                 <h1>
-                    <Link to={"/"} state={{ authToken: authToken }}>
+                    <Link to={"/"}>
                         Forum
                     </Link>
                 { community != null &&
                     <>
                         &nbsp; &gt;
-                        <Link style={{"fontSize": "24px"}} to={`/community/${community}`} state={{ authToken: authToken }}>
+                        <Link style={{"fontSize": "24px"}} to={`/community/${community}`}>
                             &nbsp; {community}
                         </Link>
                         
-                        {communityInfo &&
+                        {communityInfo && showDesc &&
                             <p style={{"fontSize": "14px"}}>{communityInfo.desc}</p>
                         }
                     </>

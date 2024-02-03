@@ -6,7 +6,7 @@ import ExpandedPost from '../components/ExpandedPost';
 import Banner from '../components/Banner';
 import { useLocation } from 'react-router-dom'
 
-const PostPage = ({ loggedIn, setLoggedIn, setAuthToken, user, authToken }) => {
+const PostPage = ({ loggedIn, setLoggedIn, setAuthToken, user, setUser, authToken }) => {
     const apiUrl = 'http://localhost:3001';
     const location = useLocation();
     const params = new URLSearchParams(window.location.search);
@@ -79,15 +79,15 @@ const PostPage = ({ loggedIn, setLoggedIn, setAuthToken, user, authToken }) => {
     return (
         <div>
             <Banner loggedIn={loggedIn} setLoggedIn={setLoggedIn} setAuthToken={setAuthToken} username={user.username}/>
-            <Header/>
-            <ExpandedPost post={post} authToken={authToken} user={user}/>
+            <Header showDesc={false}/>
+            <ExpandedPost post={post} authToken={authToken} user={user} setUser={setUser}/>
             <button onClick={showReplyHandler}>
                 Reply
             </button>
             {showReply &&
                 <CreateComment postId={post._id} setShowReply={setShowReply} authToken={authToken} user={user} getComments={getComments}/>
             }
-            <CommentTree comments={tree} authToken={authToken} user={user} getComments={getComments}/>
+            <CommentTree comments={tree} authToken={authToken} user={user} setUser={setUser} getComments={getComments}/>
         </div>
     );
 }

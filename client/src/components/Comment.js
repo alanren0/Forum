@@ -4,7 +4,7 @@ import Votes from './Votes';
 
 import '../App.css';
 
-const Comment = ({ comment, authToken, user, getComments }) => {
+const Comment = ({ comment, authToken, user, setUser, getComments }) => {
 
     const [showReply, setShowReply] = useState(false);
 
@@ -15,7 +15,7 @@ const Comment = ({ comment, authToken, user, getComments }) => {
     return (
         <div>
             <div className='card'>
-                <Votes post={comment} authToken={authToken} user={user} postOrComment="comments"/>
+                <Votes post={comment} authToken={authToken} user={user} setUser={setUser} postOrComment="comments"/>
                 <div style={{"width": "100%", "paddingRight": "40px", "boxSizing": "border-box"}}>
                     <p>{comment.user}</p>
                     <p style={{"height": "100%", "overflowWrap": "break-word"}}>{comment.body}</p>

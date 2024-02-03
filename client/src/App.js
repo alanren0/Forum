@@ -42,6 +42,7 @@ function App() {
               authToken={authToken}
               setAuthToken={setAuthToken} 
               user={user}
+              setUser={setUser}
             />}
           />
           
@@ -52,6 +53,7 @@ function App() {
               user={user} 
               loggedIn={loggedIn} 
               setLoggedIn={setLoggedIn}
+              setUser={setUser}
             />}
           />
 
@@ -63,6 +65,7 @@ function App() {
               authToken={authToken}
               setAuthToken={setAuthToken} 
               user={user}
+              setUser={setUser}
             />}
           />
           <Route path='/createCommunity' element={<CreateCommunity authToken={authToken} getCommunities={getCommunities}/>}/>

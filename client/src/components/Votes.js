@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Votes = ({ post, authToken, user, postOrComment }) => {
+const Votes = ({ post, authToken, user, setUser, postOrComment }) => {
 
     const apiUrl = 'http://localhost:3001';
 
@@ -21,7 +21,8 @@ const Votes = ({ post, authToken, user, postOrComment }) => {
         else if (user.commentVotes != null && user.commentVotes[post._id]) {
             setUserVotes((user.commentVotes[post._id]) || 0);
         }
-    }, [user, post]);
+        
+    }, [user, post, user?.postVotes, user?.commentVotes]);
 
     const upvote = () => {
         fetch(`${apiUrl}/${postOrComment}/upvote/${post._id}`, {
@@ -34,11 +35,13 @@ const Votes = ({ post, authToken, user, postOrComment }) => {
         .then(res => res.json())
         .then(data => {
             setVotes(data.updatedPost.upvotes - data.updatedPost.downvotes);
+            setUser(data.updatedUser);
             if (postOrComment === "comments") {
                 setUserVotes(data.updatedUser.commentVotes[post._id]);
             } else {
                 setUserVotes(data.updatedUser.postVotes[post._id]);
             }
+            
             
         })
         .catch(err => {
@@ -57,12 +60,13 @@ const Votes = ({ post, authToken, user, postOrComment }) => {
         .then(res => res.json())
         .then(data => {
             setVotes(data.updatedPost.upvotes - data.updatedPost.downvotes);
+            setUser(data.updatedUser);
             if (postOrComment === "comments") {
                 setUserVotes(data.updatedUser.commentVotes[post._id]);
             } else {
                 setUserVotes(data.updatedUser.postVotes[post._id]);
             }
-
+            
         })
         .catch(err => {
             console.log(err);

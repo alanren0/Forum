@@ -1,12 +1,12 @@
 import Votes from './Votes';
 import { Link } from 'react-router-dom'
 
-const Post = ({ post, authToken, user }) => {
+const Post = ({ post, authToken, user, setUser }) => {
     const [unit, time] = timeAgo(Date.parse(post.date));
     
     return (
         <div className='card'>
-            <Votes post={post} authToken={authToken} user={user} postOrComment="posts"/>
+            <Votes post={post} authToken={authToken} user={user} setUser={setUser} postOrComment="posts"/>
             
             <div className="card-body">
                 <p>

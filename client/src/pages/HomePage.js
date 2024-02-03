@@ -8,7 +8,7 @@ import Banner from '../components/Banner';
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
-const App = ({ communities, loggedIn, setLoggedIn, authToken, setAuthToken, user}) => {
+const App = ({ communities, loggedIn, setLoggedIn, authToken, setAuthToken, user, setUser}) => {
   
   const apiUrl = 'http://localhost:3001';
   const location = useLocation();
@@ -76,7 +76,7 @@ const App = ({ communities, loggedIn, setLoggedIn, authToken, setAuthToken, user
   return (
     <div className="App">
       <Banner loggedIn={loggedIn} setLoggedIn={setLoggedIn} setAuthToken={setAuthToken} username={user.username}/>
-      <Header authToken={authToken}/>
+      <Header showDesc={true}/>
       <button onClick={createPostNav}>
         Create New Post!
       </button>
@@ -86,7 +86,7 @@ const App = ({ communities, loggedIn, setLoggedIn, authToken, setAuthToken, user
       </button>
       <div className="homepage-separator">
         { posts.length >= 0 &&
-          <PostList posts={posts} authToken={authToken} user={user}/>
+          <PostList posts={posts} authToken={authToken} user={user} setUser={setUser}/>
         }
         <Communities communities={communities}/>
       </div>
